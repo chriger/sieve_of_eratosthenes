@@ -1,0 +1,61 @@
+//
+//  main.cpp
+//  SiebDesEratosthenes
+//
+//  Created by Gerloff, Christian on 26.10.14.
+//  Copyright (c) 2014 Gerloff, Christian. All rights reserved.
+//
+
+#include <iostream>
+#include "tbb/tbb.h"
+#include <iomanip>
+#include <time.h>
+#include <math.h>
+using std::setw;
+using namespace tbb;
+using namespace std;
+
+
+int main(int argc, const char * argv[]) {
+    tbb::task_scheduler_init  init(2);
+    static int zahlenReihe = 1000000000;
+    int count_prim = 0;
+    concurrent_vector<bool> vec(zahlenReihe, false);
+    
+    // Initialisierung der Zahlen
+    //for (int i = 2; i < zahlenReihe; i++) {
+    //    vec.at(i) = false;
+    //}
+    
+    tick_count t0 = tick_count::now();
+    // Siebe alle Primzahlen
+    for (int i = 2; i <= int(sqrt(zahlenReihe)); i++) {
+        if (vec[i] == false) {
+            parallel_for(i*i, zahlenReihe, i, [&](int j) {
+                vec[j] = true;
+            });
+        }
+    }
+    
+    // Parallelisieren der ersten for-Schleife
+//    parallel_for(2, int(sqrt(zahlenReihe)), 1, [&](int i) {
+//        if (vec[i] == false) {
+//            for (int j = i*i; j < zahlenReihe; j += i) {
+//                vec[j] = true;
+//            }
+//        }
+//    });
+    tick_count t1 = tick_count::now();
+    
+    for (int i=2; i<zahlenReihe; i++) {
+        if (vec[i] == false) {
+            count_prim += 1;
+        }
+    }
+    
+    printf("Zeit für Algorithmus: %g seconds\n", (t1-t0).seconds());
+    cout << "Anzahl Primzahlen: " << count_prim;
+
+    
+    return 0;
+}

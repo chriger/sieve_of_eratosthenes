@@ -8,23 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		9F13C5CB19FD3CD40041025F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F13C5CA19FD3CD40041025F /* main.cpp */; };
+		9F13C5D219FD3D290041025F /* libtbb.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F13C5D119FD3D290041025F /* libtbb.dylib */; };
+		9F13C5D319FD3D4F0041025F /* libtbb.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9F13C5D119FD3D290041025F /* libtbb.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9F13C5C519FD3CD40041025F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				9F13C5D319FD3D4F0041025F /* libtbb.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9F13C5C719FD3CD40041025F /* SiebDesEratosthenes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SiebDesEratosthenes; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F13C5CA19FD3CD40041025F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9F13C5D119FD3D290041025F /* libtbb.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtbb.dylib; path = tbb43_20140724oss/lib/libtbb.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F13C5D219FD3D290041025F /* libtbb.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +46,7 @@
 		9F13C5BE19FD3CD40041025F = {
 			isa = PBXGroup;
 			children = (
+				9F13C5D119FD3D290041025F /* libtbb.dylib */,
 				9F13C5C919FD3CD40041025F /* SiebDesEratosthenes */,
 				9F13C5C819FD3CD40041025F /* Products */,
 			);
@@ -202,14 +208,24 @@
 		9F13C5CF19FD3CD40041025F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tbb43_20140724oss/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/tbb43_20140724oss/include";
 			};
 			name = Debug;
 		};
 		9F13C5D019FD3CD40041025F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tbb43_20140724oss/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/tbb43_20140724oss/include";
 			};
 			name = Release;
 		};
